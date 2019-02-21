@@ -6,6 +6,9 @@ class User < ApplicationRecord
   has_many :inverse_connections, class_name: "Connection", foreign_key: :other_user_id
   has_many :inverse_other_users, through: :inverse_connections, source: :user
 
+  validates :name, uniqueness: {:case_sensitive => false}
+  has_secure_password
+
   def users
     all_users = []
     all_users.push(self.other_users)

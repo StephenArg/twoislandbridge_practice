@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-bob = User.create(name:"Bob")
-joe = User.create(name:"Joe")
-steve = User.create(name:"Steve")
+bob = User.create(name:"Bob", password: "what1")
+joe = User.create(name:"Joe", password: "what1")
+steve = User.create(name:"Steve", password: "what1")
 
 conversation = Connection.create(user_id: bob.id, other_user_id: joe.id)
 conversation2= Connection.create(user_id: steve.id, other_user_id: bob.id)
