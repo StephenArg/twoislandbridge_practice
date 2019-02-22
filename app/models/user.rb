@@ -1,10 +1,17 @@
 class User < ApplicationRecord
   has_many :connections
   has_many :other_users, through: :connections
+
+  # has_many :conversations
+  # has_many :user2s, through: :connections
+
   has_many :messages
 
   has_many :inverse_connections, class_name: "Connection", foreign_key: :other_user_id
   has_many :inverse_other_users, through: :inverse_connections, source: :user
+
+  # has_many :inverse_conversations, class_name: "Conversation", foreign_key: :user2_id
+  # has_many :inverse_user2s, through: :inverse_conversations, source: :user
 
   validates :name, uniqueness: {:case_sensitive => false}
   has_secure_password

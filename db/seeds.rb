@@ -14,5 +14,5 @@ conversation = Connection.create(user_id: bob.id, other_user_id: joe.id)
 conversation2= Connection.create(user_id: steve.id, other_user_id: bob.id)
 conversation3 = Connection.create(user_id: joe.id, other_user_id: bob.id)
 
-message1 = Message.create(user_id: bob.id, content: "Yo", connection_id: conversation.id)
-message2 = Message.create(user_id: joe.id, content: "Hey", connection_id: conversation.id)
+# message1 = Message.create(user_id: bob.id, content: "Yo", conversation: conversation.id)
+# message2 = Message.create(user_id: joe.id, content: "Hey", conversation: conversation.id)

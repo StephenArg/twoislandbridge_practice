@@ -3,6 +3,7 @@ class CreateConnections < ActiveRecord::Migration[5.2]
     create_table :connections do |t|
       t.integer :user_id
       t.integer :other_user_id
+
       t.timestamps
     end
   end
