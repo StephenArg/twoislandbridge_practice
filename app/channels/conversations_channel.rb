@@ -5,6 +5,12 @@ class ConversationsChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+
+    @conversation = Conversation.find(params["conversation_id"])
+    if @conversation.user_id == nil and @conversation.other_user_id == nil
+      @conversation.destroy
+    else
+      ConversationsChannel.broadcast_to(@conversation, {send_id: true})
+    end
   end
 end
