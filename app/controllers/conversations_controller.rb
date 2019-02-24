@@ -28,6 +28,7 @@ class ConversationsController < ApplicationController
 
   def reopen
     conversation = Conversation.find(params["conversation_id"])
+    conversation.messages.destroy_all
     present_user_id = params["user_id"]
     if conversation.user_id == present_user_id
       conversation.update(other_user_id: nil, status: "open")
