@@ -7,20 +7,21 @@ class ConversationsController < ApplicationController
     #.find_by("user_id != ?", params["user"]["id"]).find_by("other_user_id != ?", params["user"]["id"])
 
     if open_room == nil
+      uuid = UUID.new
       # create new Conversation with user inside it
-      new_convo = Conversation.create(user_id: params["user"]["id"], status: "open")
-      render json: {conversation_id: new_convo.id}
+      new_convo = Conversation.create(user_id: params["user"]["id"], status: "open", videoID: uuid.generate)
+      render json: {conversation_id: new_convo.id, videoID: new_convo.videoID}
     else
       # add user to open user in room, change status
       if open_room.user_id == nil and open_room.other_user_id != params["user"]["id"]
         open_room.update(user_id: params["user"]["id"], status: "closed")
-        render json: {conversation_id: open_room.id}
+        render json: {conversation_id: open_room.id, videoID: open_room.videoID}
       elsif open_room.other_user_id == nil and open_room.user_id != params["user"]["id"]
         open_room.update(other_user_id: params["user"]["id"], status: "closed")
-        render json: {conversation_id: open_room.id}
+        render json: {conversation_id: open_room.id, videoID: open_room.videoID}
       else
         new_convo = Conversation.create(user_id: params["user"]["id"], status: "open")
-        render json: {conversation_id: new_convo.id}
+        render json: {conversation_id: new_convo.id, videoID: open_room.videoID}
       end
       # ActionCable.server.broadcast_to open_room
     end
