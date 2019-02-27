@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def create
-    @user = User.new(name: params["name"], password: params["password"])
+    @user = User.new(name: params["name"], password: params["password"], location: params["location"])
     if @user.save
       payload = {name: @user.name}
       token = JWT.encode(payload, "secretPass7")
@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       u.name.downcase == params["name"].downcase
     end
     if @user && @user.authenticate(params["password"])
+      @user.update(location: params["location"])
       payload = {name: @user.name}
       token = JWT.encode(payload, "secretPass7")
       render json: {user: @user, jwt: token}

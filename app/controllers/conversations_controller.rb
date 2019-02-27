@@ -16,9 +16,19 @@ class ConversationsController < ApplicationController
       if open_room.user_id == nil and open_room.other_user_id != params["user"]["id"]
         open_room.update(user_id: params["user"]["id"], status: "closed")
         render json: {conversation_id: open_room.id, videoID: open_room.videoID}
+        # @user1 = User.find(open_room.user_id)
+        # @user2 = User.find(open_room.other_user_id)
+        # ConversationsChannel.broadcast_to(open_room, {user1Location: @user1.location, user2Location: @user2.location,
+        #                                                  user1Name: @user1.name, user2Name: @user2.name, location: "locations",
+        #                                                   send_id: "location"})
       elsif open_room.other_user_id == nil and open_room.user_id != params["user"]["id"]
         open_room.update(other_user_id: params["user"]["id"], status: "closed")
         render json: {conversation_id: open_room.id, videoID: open_room.videoID}
+        # @user1 = User.find(open_room.user_id)
+        # @user2 = User.find(open_room.other_user_id)
+        # ConversationsChannel.broadcast_to(open_room, {user1Location: @user1.location, user2Location: @user2.location,
+        #                                                  user1Name: @user1.name, user2Name: @user2.name, location: "locations",
+        #                                                   send_id: "location"})
       else
         new_convo = Conversation.create(user_id: params["user"]["id"], status: "open")
         render json: {conversation_id: new_convo.id, videoID: open_room.videoID}
