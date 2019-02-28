@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
+
+namespace :api do
   resources :users
   resources :conversations
   resources :messages
@@ -9,6 +11,6 @@ Rails.application.routes.draw do
   post 'conversation/search', to: 'conversations#find_open_room'
   post 'conversation/reopen', to: 'conversations#reopen'
 
-
+end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

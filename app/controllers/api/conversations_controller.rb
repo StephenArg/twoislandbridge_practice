@@ -1,4 +1,4 @@
-class ConversationsController < ApplicationController
+class Api::ConversationsController < ApplicationController
 
   def find_open_room
     open_room = Conversation.find_by(status: 'open')
