@@ -84,7 +84,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
-  config.action_cable.allowed_request_origins = ['http://localhost:3001', '10.39.105.204:3001']
+  Rails.application.config.action_cable.disable_request_forgery_protection = true
 
   #https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
   config.web_socket_server_url = "wss://https://lit-shore-21918.herokuapp.com/cable"
