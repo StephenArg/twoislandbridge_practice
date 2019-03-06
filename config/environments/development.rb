@@ -52,4 +52,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  #https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
+  Rails.application.config.action_cable.disable_request_forgery_protection = true
+
 end

@@ -83,8 +83,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  #https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
-  Rails.application.config.action_cable.disable_request_forgery_protection = true
 
   #https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
   config.web_socket_server_url = "wss://https://lit-shore-21918.herokuapp.com/cable"
