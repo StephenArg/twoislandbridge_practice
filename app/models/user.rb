@@ -17,12 +17,13 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: {:case_sensitive => false}
   validates :name, :email, presence: true
+  validates :name, length: { in: 1..20 }
   validates :password, length: { in: 3..30 }
   validates :email, format: {
       with: URI::MailTo::EMAIL_REGEXP,
       message: 'Only valid emails allowed'
   }
-  validates :image_url, allow_blank: true, format: { with: %r{.(gif|jpg|png)\Z}i, message: 'must be a URL for GIF, JPG or PNG image.' }
+  # validates :image_url, format: { with: %r{.(gif|jpg|png)\Z}i, message: 'must be a URL for GIF, JPG or PNG image.' }
 
   has_secure_password
 

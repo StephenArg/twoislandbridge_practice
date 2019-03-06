@@ -1,9 +1,10 @@
 class Api::UsersController < ApplicationController
 
   def create
-    @user = User.new(name: params["name"], password: params["password"], location: params["location"])
+    @user = User.new(email: params["email"], name: params["name"], password: params["password"],
+                     location: params["location"], image_url: ["image_url"])
     if @user.save
-      payload = {name: @user.name}
+      payload = {email: @user.email}
       token = JWT.encode(payload, "secretPass7")
       render json: {user: @user, jwt: token}
       puts "Saved"
@@ -14,11 +15,11 @@ class Api::UsersController < ApplicationController
 
   def login
     @user = User.find do |u|
-      u.name.downcase == params["name"].downcase
+      u.email.downcase == params["email"].downcase
     end
     if @user && @user.authenticate(params["password"])
       @user.update(location: params["location"])
-      payload = {name: @user.name}
+      payload = {email: @user.email}
       token = JWT.encode(payload, "secretPass7")
       render json: {user: @user, jwt: token}
     end
@@ -28,7 +29,7 @@ class Api::UsersController < ApplicationController
   def authenticate
     if JWT.decode(params["jwt"], "secretPass7")
       @user = User.find do |u|
-        u.name.downcase == JWT.decode(params["jwt"], "secretPass7")[0]["name"].downcase
+        u.email.downcase == JWT.decode(params["jwt"], "secretPass7")[0]["email"].downcase
       end
       render json: @user
     end
