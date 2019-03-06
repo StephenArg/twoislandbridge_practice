@@ -1,5 +1,12 @@
 class Api::ConversationsController < ApplicationController
 
+  def connections
+    user = User.find(params["id"])
+    # @connections = [user.connections, user.inverse_connections].flatten!
+    @connections = user.all_connections
+    render json: @connections
+  end
+
   def find_open_room
     open_room = Conversation.find_by(status: 'open')
     # users can currently join their own conversations. I need to find a way to prevent that here.

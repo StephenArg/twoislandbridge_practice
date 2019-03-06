@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_save :default_values
+
   has_many :connections
   has_many :other_users, through: :connections
 
@@ -13,7 +15,15 @@ class User < ApplicationRecord
   # has_many :inverse_conversations, class_name: "Conversation", foreign_key: :user2_id
   # has_many :inverse_user2s, through: :inverse_conversations, source: :user
 
-  validates :name, uniqueness: {:case_sensitive => false}
+  validates :email, uniqueness: {:case_sensitive => false}
+  validates :name, :email, presence: true
+  validates :password, length: { in: 3..30 }
+  validates :email, format: {
+      with: URI::MailTo::EMAIL_REGEXP,
+      message: 'Only valid emails allowed'
+  }
+  validates :image_url, allow_blank: true, format: { with: %r{.(gif|jpg|png)\Z}i, message: 'must be a URL for GIF, JPG or PNG image.' }
+
   has_secure_password
 
   def users
@@ -27,8 +37,11 @@ class User < ApplicationRecord
     all_connections = []
     all_connections.push(self.connections)
     all_connections.push(self.inverse_connections)
-    puts all_connections
     all_connections.flatten!
+  end
+
+  def default_values
+    self.image_url ||= "https://www.axiumradonmitigations.com/wp-content/uploads/2015/01/icon-user-default.png"
   end
 
 end
