@@ -52,6 +52,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  #https://blog.heroku.com/real_time_rails_implementing_websockets_in_rails_5_with_action_cable
-  config.action_cable.allowed_request_origins = ['http://localhost:3001', '10.39.105.204:3001']
 end
