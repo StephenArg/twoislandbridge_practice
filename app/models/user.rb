@@ -42,7 +42,7 @@ class User < ApplicationRecord
   end
 
   def default_values
-    if self.image_url == "[\"image_url\"]"
+    if self.image_url == nil or self.image_url == ""
       self.image_url = "https://www.axiumradonmitigations.com/wp-content/uploads/2015/01/icon-user-default.png"
     end
   end

@@ -2,7 +2,7 @@ class Api::UsersController < ApplicationController
 
   def create
     @user = User.new(email: params["email"], name: params["name"], password: params["password"],
-                     location: params["location"], image_url: ["image_url"])
+                     location: params["location"], image_url: params["image_url"])
     if @user.save
       payload = {email: @user.email}
       token = JWT.encode(payload, "secretPass7")
