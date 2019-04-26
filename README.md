@@ -26,6 +26,6 @@ Things you may want to cover:
 
 # Two Island Bridge (aka TibChat)
 
-## Online chat website that pairs random users for webcam and text-based conversations.
+### Online chat website that pairs random users for webcam and text-based conversations.
 
 ## Instructions to run
