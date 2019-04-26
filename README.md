@@ -26,6 +26,22 @@ Things you may want to cover:
 
 # Two Island Bridge (aka TibChat)
 
-##### Online chat website that pairs random users for webcam and text-based conversations.
+###### Online chat website that pairs random users for webcam and text-based conversations. | [Demo](https://tibchat.herokuapp.com/)
 
 ### Clone and run application
+
+* Run rails back end
+  ```bash
+  git clone git@github.com:StephenArg/twoislandbridge_practice.git
+  bundle install
+  rails s -p 3001
+  ```
+* Run react front end
+  ```bash
+  git clone git@github.com:StephenArg/react_twoislandbridge_practice.git
+  npm install
+  ```
+  After installing packages, create a file called `.env` in the main directory and add this line to it.
+  `REACT_APP_API_LOCATION=localhost:3000`
+  After this, run `npm start`
+  
